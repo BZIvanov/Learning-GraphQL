@@ -1,5 +1,5 @@
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
+const expressGraphQL = require('express-graphql');
 
 const schema = require('./schema/schema');
 
@@ -7,10 +7,11 @@ const app = express();
 
 /* 
 1. It works as a middleware
-2. graphqlHTTP is a variable which holds function which will execute the middleware on each request
+2. expressGraphQL is a variable which holds function which will execute the middleware on each request
 */
-app.use('/graphql', graphqlHTTP({
-    schema
+app.use('/graphql', expressGraphQL({
+    schema,
+    graphiql: true
 }));
 
 app.listen(4000, () => {
