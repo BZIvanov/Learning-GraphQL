@@ -1,13 +1,11 @@
-const graphql = require('graphql');
-
-const { 
+const {
+    GraphQLSchema,
     GraphQLObjectType,
     GraphQLString,
-    GraphQLSchema,
     GraphQLID,
     GraphQLInt,
     GraphQLList
-} = graphql;
+} = require('graphql');
 
 //dummy data
 const books = [
@@ -60,6 +58,7 @@ const AuthorType = new GraphQLObjectType({
 // book property here will be what is on the request url
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
+    description: 'The main query fields are here',
     fields: {
         book: {
             type: BookType,

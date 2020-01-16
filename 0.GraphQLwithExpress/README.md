@@ -1,3 +1,7 @@
+# Start the project
+
+Run **npm start** and open *http://localhost:4000/graphql* in the browser.
+
 # GraphQL
 
 1. GraphQL allows us to get all the data we need in a single http request.
