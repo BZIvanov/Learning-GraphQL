@@ -42,9 +42,35 @@ const posts = [
   },
 ];
 
+const comments = [
+  {
+    id: '102',
+    text: 'This worked well for me. Thanks!',
+    author: '3',
+    post: '10',
+  },
+  {
+    id: '103',
+    text: 'Glad you enjoyed it.',
+    author: '1',
+    post: '10',
+  },
+  {
+    id: '104',
+    text: 'This did no work.',
+    author: '2',
+    post: '11',
+  },
+  {
+    id: '105',
+    text: 'Nevermind. I got it to work.',
+    author: '1',
+    post: '11',
+  },
+];
+
 exports.resolvers = {
   Query: {
-    // args are incoming parameters from the client
     users(parent, args, ctx, info) {
       if (!args.query) {
         return users;
@@ -69,6 +95,9 @@ exports.resolvers = {
         return isTitleMatch || isBodyMatch;
       });
     },
+    comments(parent, args, ctx, info) {
+      return comments;
+    },
     me() {
       return {
         id: '123098',
@@ -86,10 +115,38 @@ exports.resolvers = {
     },
   },
   Post: {
-    // when this type is used in a query it will be called with the respective parent each time, so if we use this Post as array [Post!]! this method will be called as many times as elements in the array
     author(parent, args, ctx, info) {
       return users.find((user) => {
         return user.id === parent.author;
+      });
+    },
+    comments(parent, args, ctx, info) {
+      return comments.filter((comment) => {
+        return comment.post === parent.id;
+      });
+    },
+  },
+  Comment: {
+    author(parent, args, ctx, info) {
+      return users.find((user) => {
+        return user.id === parent.author;
+      });
+    },
+    post(parent, args, ctx, info) {
+      return posts.find((post) => {
+        return post.id === parent.post;
+      });
+    },
+  },
+  User: {
+    posts(parent, args, ctx, info) {
+      return posts.filter((post) => {
+        return post.author === parent.id;
+      });
+    },
+    comments(parent, args, ctx, info) {
+      return comments.filter((comment) => {
+        return comment.author === parent.id;
       });
     },
   },
