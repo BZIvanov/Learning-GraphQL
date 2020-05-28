@@ -1,35 +1,42 @@
+const http = require('http');
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, PubSub } = require('apollo-server-express');
 
 const { typeDefs } = require('./schema');
 const Query = require('./resolvers/Query');
 const Mutation = require('./resolvers/Mutation');
+const Subscription = require('./resolvers/Subscription');
 const User = require('./resolvers/User');
 const Post = require('./resolvers/Post');
 const Comment = require('./resolvers/Comment');
 
 const db = require('./db');
 
+const pubsub = new PubSub();
+
 const server = new ApolloServer({
   typeDefs,
   resolvers: {
     Query,
     Mutation,
+    Subscription,
     User,
     Post,
     Comment,
   },
-  // the context will be provided to the resolvers as the third parameter
-  // the context is easy way to provide something to all of ours resolvers instead providing it one by one
   context: {
     db,
+    pubsub,
   },
 });
 
 const app = express();
 server.applyMiddleware({ app });
 
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
+
 const port = process.env.PORT || 3100;
-app.listen(port, () =>
+httpServer.listen(port, () =>
   console.log(`Server listening on port http://localhost:${port}/graphql`)
 );
