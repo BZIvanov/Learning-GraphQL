@@ -1,6 +1,5 @@
 module.exports = {
   users(parent, args, { db }, info) {
-    console.log('HEREEE');
     if (!args.query) {
       return db.users;
     }

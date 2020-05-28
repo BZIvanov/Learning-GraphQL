@@ -24,7 +24,8 @@ exports.typeDefs = gql`
 
   type Subscription {
     count: Int!
-    comment(postId: ID!): Comment!
+    comment(postId: ID!): CommentSubscriptionPayload!
+    post: PostSubscriptionPayload!
   }
 
   input CreateUserInput {
@@ -85,5 +86,21 @@ exports.typeDefs = gql`
     text: String!
     author: User!
     post: Post!
+  }
+
+  enum MutationType {
+    CREATED
+    UPDATED
+    DELETED
+  }
+
+  type PostSubscriptionPayload {
+    mutation: MutationType!
+    data: Post!
+  }
+
+  type CommentSubscriptionPayload {
+    mutation: MutationType!
+    data: Comment!
   }
 `;
