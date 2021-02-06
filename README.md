@@ -38,3 +38,7 @@ When using graphql with node.js we can choose between different types of servers
 ### Specifics
 
 - GraphQL playground is constantly sending requests to our server to have updated schema. We can change the settings if needed by clicking the icon top-right corner.
+
+### Hint
+
+With ctrl + space in the playground you can expand the list with available keys.

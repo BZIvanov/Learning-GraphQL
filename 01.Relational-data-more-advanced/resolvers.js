@@ -1,4 +1,3 @@
-// Demo user data
 const users = [
   {
     id: '1',
@@ -75,7 +74,9 @@ exports.resolvers = {
       if (!args.query) {
         return users;
       }
-
+      // for User type from the schema we can see we are also returning posts and comments
+      // but because they are not on the user object, they will be resolved by types at the bottom of this file
+      // line 121 in this example
       return users.filter((user) => {
         return user.name.toLowerCase().includes(args.query.toLowerCase());
       });
@@ -98,56 +99,32 @@ exports.resolvers = {
     comments(parent, args, ctx, info) {
       return comments;
     },
-    me() {
-      return {
-        id: '123098',
-        name: 'Mike',
-        email: 'mike@example.com',
-      };
-    },
-    post() {
-      return {
-        id: '092',
-        title: 'GraphQL 101',
-        body: '',
-        published: false,
-      };
+    post(parent, args, ctx, info) {
+      return posts.find((post) => post.id === args.id);
     },
   },
   Post: {
     author(parent, args, ctx, info) {
-      return users.find((user) => {
-        return user.id === parent.author;
-      });
+      return users.find((user) => user.id === parent.author);
     },
     comments(parent, args, ctx, info) {
-      return comments.filter((comment) => {
-        return comment.post === parent.id;
-      });
+      return comments.filter((comment) => comment.post === parent.id);
     },
   },
   Comment: {
     author(parent, args, ctx, info) {
-      return users.find((user) => {
-        return user.id === parent.author;
-      });
+      return users.find((user) => user.id === parent.author);
     },
     post(parent, args, ctx, info) {
-      return posts.find((post) => {
-        return post.id === parent.post;
-      });
+      return posts.find((post) => post.id === parent.post);
     },
   },
   User: {
     posts(parent, args, ctx, info) {
-      return posts.filter((post) => {
-        return post.author === parent.id;
-      });
+      return posts.filter((post) => post.author === parent.id);
     },
     comments(parent, args, ctx, info) {
-      return comments.filter((comment) => {
-        return comment.author === parent.id;
-      });
+      return comments.filter((comment) => comment.author === parent.id);
     },
   },
 };
