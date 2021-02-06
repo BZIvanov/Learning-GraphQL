@@ -78,19 +78,18 @@ exports.resolvers = {
     },
     post() {
       return {
-        id: '092',
+        id: '1',
         title: 'GraphQL 101',
         body: '',
         published: false,
+        author: '2',
       };
     },
   },
   Post: {
     // when this type is used in a query it will be called with the respective parent each time, so if we use this Post as array [Post!]! this method will be called as many times as elements in the array
     author(parent, args, ctx, info) {
-      return users.find((user) => {
-        return user.id === parent.author;
-      });
+      return users.find((user) => user.id === parent.author);
     },
   },
 };

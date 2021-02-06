@@ -1,0 +1,56 @@
+# Below are example queries to test with
+
+query users {
+  users {
+    id
+    name
+    email
+    age
+  }
+}
+
+query users {
+  users(query: "s") {
+    id
+    name
+    email
+    age
+  }
+}
+
+query posts {
+  posts(query: "a") {
+    id
+    title
+    body
+    published
+    author {
+      id
+      name
+      email
+      age
+    }
+  }
+}
+
+query post {
+  post {
+    id
+    title
+    body
+    published
+    author {
+      id
+      name
+    }
+  }
+}
+
+query me {
+  me {
+    id
+    name
+    email
+    age
+  }
+}
