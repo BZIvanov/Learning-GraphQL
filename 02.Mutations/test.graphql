@@ -1,0 +1,55 @@
+query users {
+  users {
+    name
+    email
+  }
+}
+
+query posts {
+  posts {
+    title
+    author {
+      email
+    }
+  }
+}
+
+query comments {
+  comments {
+    text
+    author {
+      name
+    }
+    post {
+      title
+      published
+    }
+  }
+}
+
+mutation createUser {
+  createUser(data: { name: "Miro", email: "miro@mail.bg", age: 11 }) {
+    id
+    name
+    email
+    age
+    posts {
+      title
+    }
+  }
+}
+
+mutation updateUser {
+  updateUser(
+    id: "847e4a87-c06e-4c91-83a5-4de1fb5d7b5f"
+    data: { email: "miro@mail.com" }
+  ) {
+    email
+  }
+}
+
+mutation deleteUser {
+  deleteUser(id: "847e4a87-c06e-4c91-83a5-4de1fb5d7b5f") {
+    email
+  }
+}
