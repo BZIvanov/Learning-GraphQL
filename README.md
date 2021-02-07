@@ -39,6 +39,10 @@ When using graphql with node.js we can choose between different types of servers
 
 - GraphQL playground is constantly sending requests to our server to have updated schema. We can change the settings if needed by clicking the icon top-right corner.
 
+- Data ending with exclamation mark '!' means it is required and can not be null
+
+- input in type definitions are not necessary but good to use and provide them as function arguments because this way the code is easier to read and we can reuse the inputs in other function arguments
+
 ### Hint
 
 With ctrl + space in the playground you can expand the list with available keys.
