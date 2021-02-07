@@ -3,7 +3,6 @@ module.exports = {
   count: {
     subscribe(parent, args, { pubsub }, info) {
       let count = 0;
-      console.log('HEREEE');
       setInterval(() => {
         count++;
         // the publish method is what will return the value to the client, in this case we need to return number value as described in the schema
@@ -15,6 +14,11 @@ module.exports = {
       // in subscriptions instead the value described in the schema we return this function call
       // the parameter is the name of the channel we want to create
       return pubsub.asyncIterator('count');
+    },
+  },
+  post: {
+    subscribe(parent, args, { pubsub }, info) {
+      return pubsub.asyncIterator('post');
     },
   },
   comment: {
@@ -29,11 +33,6 @@ module.exports = {
 
       // this way we create unique name for our channel which will be for specific comment
       return pubsub.asyncIterator(`comment ${postId}`);
-    },
-  },
-  post: {
-    subscribe(parent, args, { pubsub }, info) {
-      return pubsub.asyncIterator('post');
     },
   },
 };

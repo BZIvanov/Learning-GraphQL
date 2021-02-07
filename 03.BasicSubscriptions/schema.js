@@ -6,8 +6,6 @@ exports.typeDefs = gql`
     users(query: String): [User!]!
     posts(query: String): [Post!]!
     comments: [Comment!]!
-    me: User!
-    post: Post!
   }
 
   type Mutation {

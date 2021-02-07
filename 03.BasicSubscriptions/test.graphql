@@ -1,0 +1,71 @@
+# dummy subscription
+subscription count {
+  count
+}
+
+# new post - first subscribe to a topic then in another tab create and delete a post and you can see the results in the tab with the subscription
+subscription post {
+  post {
+    mutation
+    data {
+      id
+      title
+      body
+      published
+      author {
+        name
+      }
+    }
+  }
+}
+
+mutation createPost {
+  createPost(
+    data: { title: "My post", body: "Some body", published: true, author: "2" }
+  ) {
+    id
+    title
+    body
+    author {
+      name
+    }
+  }
+}
+
+mutation deletePost {
+  deletePost(id: "3f0dba8b-06b0-4863-856e-c50bd9beadcd") {
+    id
+    title
+    author {
+      name
+    }
+  }
+}
+
+# subscribe to specific post
+subscription comment {
+  comment(postId: "12") {
+    mutation
+    data {
+      id
+      post {
+        title
+      }
+      author {
+        name
+      }
+    }
+  }
+}
+
+mutation createComment {
+  createComment(data: { text: "Works", author: 1, post: 12 }) {
+    text
+    author {
+      name
+    }
+    post {
+      title
+    }
+  }
+}
