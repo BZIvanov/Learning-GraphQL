@@ -1,0 +1,14 @@
+# test queries
+query getTodos {
+  getTodos {
+    task
+    completed
+  }
+}
+
+mutation addTodo {
+  addTodo(task: "Another", completed: true) {
+    task
+    completed
+  }
+}
