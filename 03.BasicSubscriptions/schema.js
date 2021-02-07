@@ -86,12 +86,14 @@ exports.typeDefs = gql`
     post: Post!
   }
 
+  # with enum we will not just for any string, but string which is exactly one of the following
   enum MutationType {
     CREATED
     UPDATED
     DELETED
   }
 
+  # here we will use this type of data because we want to know in the subscription was the Post created, updated or deleted so we can handle it in a proper way. We will keep that kind of information in mutation property as string
   type PostSubscriptionPayload {
     mutation: MutationType!
     data: Post!
