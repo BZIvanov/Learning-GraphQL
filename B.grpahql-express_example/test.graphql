@@ -1,0 +1,45 @@
+query books {
+  books {
+    id
+    name
+    genre
+    author {
+      id
+      name
+      age
+    }
+  }
+}
+
+query book {
+  book(id: 2) {
+    id
+    name
+    genre
+    author {
+      name
+    }
+  }
+}
+
+query authors {
+  authors {
+    id
+    name
+    age
+    books {
+      name
+    }
+  }
+}
+
+query author {
+  author(id: 2) {
+    id
+    name
+    age
+    books {
+      name
+    }
+  }
+}
