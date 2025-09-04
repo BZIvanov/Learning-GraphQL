@@ -1,4 +1,6 @@
-# GraphQL
+# Learning GraphQL
+
+**GraphQL** is a query language for APIs that allows clients to request exactly the data they need, reducing over-fetching and under-fetching. It uses a strongly typed schema to define the data structure, enabling powerful developer tooling and introspection. Unlike REST, GraphQL typically operates through a single endpoint for queries, mutations, and real-time subscriptions.
 
 1. GraphQL allows us to get all the data we need in a single http request.
 2. With GraphQL we can get only specific data we need which means it will all works faster.
@@ -58,3 +60,8 @@ The other benefit is if we want strings or booleans, if we set string then we wi
 ### Working with files
 
 GraphQL is working with .json objects and in case we need to work with files a solution is to use rest endpoint just for the file. Our API will basically handle all the json data with graphql and separate rest routes for files.
+
+## Content
+
+1. Introduction
+2. BasicQueries

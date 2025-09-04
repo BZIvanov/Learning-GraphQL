@@ -10,8 +10,7 @@ query users {
 }
 
 query users {
-  users(query: "s") {
-    id
+  users(query: "e") {
     name
     email
     age
@@ -19,7 +18,7 @@ query users {
 }
 
 query posts {
-  posts(query: "a") {
+  posts(query: "m") {
     id
     title
     body
@@ -33,6 +32,15 @@ query posts {
   }
 }
 
+query me {
+  me {
+    id
+    name
+    email
+    age
+  }
+}
+
 query post {
   post {
     id
@@ -43,14 +51,5 @@ query post {
       id
       name
     }
-  }
-}
-
-query me {
-  me {
-    id
-    name
-    email
-    age
   }
 }
