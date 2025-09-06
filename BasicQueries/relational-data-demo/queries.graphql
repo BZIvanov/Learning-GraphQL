@@ -1,5 +1,6 @@
 # Below are example queries to test with
 
+# Get all users with all their fields
 query users {
   users {
     id
@@ -9,6 +10,7 @@ query users {
   }
 }
 
+# Get users with a name containing "e"
 query users {
   users(query: "e") {
     name
@@ -17,6 +19,43 @@ query users {
   }
 }
 
+# Get users with a name containing "a" and all their posts with all fields
+query users {
+  users(query: "a") {
+    id
+    name
+    email
+    age
+    posts {
+      id
+      title
+      body
+      published
+      author {
+        name
+        email
+        age
+      }
+      comments {
+        id
+        text
+      }
+    }
+  }
+}
+
+# Get all posts with their comments text
+query posts {
+  posts {
+    id
+    title
+    comments {
+      text
+    }
+  }
+}
+
+# Get posts with a title or body containing "m" and all their fields
 query posts {
   posts(query: "m") {
     id
@@ -32,24 +71,37 @@ query posts {
   }
 }
 
+# Get a single post by ID with all its fields
+query post {
+  post(id: "10") {
+    id
+    title
+    body
+    published
+    author {
+      name
+    }
+  }
+}
+
+# Get all comments with their author's name and email
+query comments {
+  comments {
+    id
+    text
+    author {
+      name
+      email
+    }
+  }
+}
+
+# Get the currently logged-in user with all their fields
 query me {
   me {
     id
     name
     email
     age
-  }
-}
-
-query post {
-  post {
-    id
-    title
-    body
-    published
-    author {
-      id
-      name
-    }
   }
 }

@@ -4,6 +4,8 @@ export const typeDefs = `#graphql
     name: String!
     email: String!
     age: Int # missing exclamation mark means the return value could be null
+    posts: [Post!]!
+    comments: [Comment!]!
   }
 
   type Post {
@@ -12,6 +14,14 @@ export const typeDefs = `#graphql
     body: String!
     published: Boolean!
     author: User!
+    comments: [Comment!]!
+  }
+
+  type Comment {
+    id: ID!
+    text: String!
+    author: User!
+    post: Post!
   }
 
   # here type Query is important to be written like this, it is not optional
@@ -19,8 +29,9 @@ export const typeDefs = `#graphql
   type Query {
     users(query: String): [User!]!
     posts(query: String): [Post!]!
+    post(id: String): Post!
+    comments: [Comment!]!
     me: User!
-    post: Post!
   }
 
   # if we request post it is of type Post, but the Post has author, which is not of a scalar

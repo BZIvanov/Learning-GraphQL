@@ -1,33 +1,4 @@
-// Demo user data
-const users = [
-  { id: "1", name: "Andrew", email: "andrew@example.com", age: 27 },
-  { id: "2", name: "Sarah", email: "sarah@example.com" },
-  { id: "3", name: "Mike", email: "mike@example.com" },
-];
-
-const posts = [
-  {
-    id: "10",
-    title: "GraphQL 101",
-    body: "This is how to use GraphQL...",
-    published: true,
-    author: "1",
-  },
-  {
-    id: "11",
-    title: "GraphQL 201",
-    body: "This is an advanced GraphQL post...",
-    published: false,
-    author: "1",
-  },
-  {
-    id: "12",
-    title: "Programming Music",
-    body: "",
-    published: false,
-    author: "2",
-  },
-];
+import { users, posts, comments } from "./demo-data.js";
 
 export const resolvers = {
   Query: {
@@ -37,6 +8,8 @@ export const resolvers = {
         return users;
       }
 
+      // for User type from the schema we can see we are also returning posts and comments
+      // but because they are not on the user object, they will be resolved by types at the bottom of this file
       return users.filter((user) =>
         user.name.toLowerCase().includes(args.query.toLowerCase())
       );
@@ -56,23 +29,39 @@ export const resolvers = {
         return titleMatch || bodyMatch;
       });
     },
+    post(parent, args, ctx, info) {
+      return posts.find((post) => post.id === args.id);
+    },
+    comments(parent, args, ctx, info) {
+      return comments;
+    },
     me() {
       return { id: "123098", name: "Mike", email: "mike@example.com" };
-    },
-    post() {
-      return {
-        id: "1",
-        title: "GraphQL 101",
-        body: "",
-        published: false,
-        author: "2",
-      };
     },
   },
   Post: {
     // when this type is used in a query it will be called with the respective parent each time, so if we use this Post as array [Post!]! this method will be called as many times as elements in the array
     author(parent, args, ctx, info) {
       return users.find((user) => user.id === parent.author);
+    },
+    comments(parent, args, ctx, info) {
+      return comments.filter((comment) => comment.post === parent.id);
+    },
+  },
+  Comment: {
+    author(parent, args, ctx, info) {
+      return users.find((user) => user.id === parent.author);
+    },
+    post(parent, args, ctx, info) {
+      return posts.find((post) => post.id === parent.post);
+    },
+  },
+  User: {
+    posts(parent, args, ctx, info) {
+      return posts.filter((post) => post.author === parent.id);
+    },
+    comments(parent, args, ctx, info) {
+      return comments.filter((comment) => comment.author === parent.id);
     },
   },
 };
