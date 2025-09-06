@@ -1,0 +1,17 @@
+# Example queries to test the demo app
+
+# Get all books
+query GetBooks {
+  books {
+    title
+    author
+  }
+}
+
+# Get a book by title
+query GetBookByTitle {
+  bookByTitle(title: "City of Glass") {
+    title
+    author
+  }
+}

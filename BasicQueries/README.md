@@ -15,4 +15,5 @@ type User {
 
 ## Content of this section
 
+- basic-queries-demo
 - relational-data-demo
