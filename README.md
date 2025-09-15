@@ -2,31 +2,20 @@
 
 **GraphQL** is a query language for APIs that allows clients to request exactly the data they need, reducing over-fetching and under-fetching. It uses a strongly typed schema to define the data structure, enabling powerful developer tooling and introspection. Unlike REST, GraphQL typically operates through a single endpoint for queries, mutations, and real-time subscriptions.
 
-1. GraphQL allows us to get all the data we need in a single http request.
-2. With GraphQL we can get only specific data we need which means it will all works faster.
-3. GraphQL creates fast and flexible APIs, giving clients complete control to ask for just the data they need.
-4. Fewer HTTP requests. Flexible data querying. Less code to manage.
+## Efficient and flexible data fetching
 
-## GraphQL operation
+- **Single request:** Fetch all required data in one HTTP request.
+- **Exact fields:** Request only the data you need, avoiding over-fetching.
+- **Flexible APIs:** Clients control the structure of the response.
+- **Efficiency:** Often fewer requests and smaller payloads compared to REST.
 
-There are 3 major types of operations we can perform.
+## GraphQL operations
 
-1. query - with query we can query some data
-   When we nested query an object like 'me' in this example we need to specify which properties we want, it can not be just 'me'
+There are 3 main types of operations in GraphQL:
 
-```javascript
-query {
-    hello
-    courseInstructor
-    me {
-        name
-    }
-}
-```
-
-2. mutation - to transform some data in a way we want
-
-3. subscription - watch data for changes
+1. **Query** – fetch data.
+2. **Mutation** – modify data (create, update, or delete).
+3. **Subscription** – receive real-time updates when data changes.
 
 ### Specifics
 
@@ -48,3 +37,5 @@ GraphQL is working with .json objects and in case we need to work with files a s
 
 1. Introduction
 2. BasicQueries
+3. BasicMutations
+4. BasicSubscriptions
