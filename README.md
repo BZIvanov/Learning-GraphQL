@@ -39,3 +39,4 @@ GraphQL is working with .json objects and in case we need to work with files a s
 2. BasicQueries
 3. BasicMutations
 4. BasicSubscriptions
+5. PostsSharing - demo project
